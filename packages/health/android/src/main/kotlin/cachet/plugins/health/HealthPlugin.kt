@@ -186,6 +186,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
     /// Called when the "getHealthDataByType" is invoked from Flutter
     private fun getData(call: MethodCall, result: Result) {
         if (activity == null) {
+            Log.e("FLUTTER_HEALTH", "getData(...): activity is null")
             result.success(null)
             return
         }
@@ -227,6 +228,7 @@ class HealthPlugin(private var channel: MethodChannel? = null) : MethodCallHandl
                 }
                 activity!!.runOnUiThread { result.success(healthData) }
             } catch (e3: Exception) {
+                Log.e("FLUTTER_HEALTH: getData(): Exception: ", e3.toString())
                 activity!!.runOnUiThread { result.success(null) }
             }
         }
